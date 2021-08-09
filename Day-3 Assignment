@@ -1,0 +1,98 @@
+Assignment:
+
+Implement the following functions for a single linked list:
+1. Insert at end
+2. Delete from beginning
+3. Delete from end
+
+
+#include <iostream>
+
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    
+    node(int val){
+        data = val;
+        next=NULL;
+    }
+    
+};
+
+
+node *insertTail(node *head, int val){
+    node *n = new node(val);
+    
+    if(head==NULL){
+        head=n;
+    }
+    else{
+        node *temp = head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp->next=n;
+        return head;
+        
+    }
+}
+
+node *deleteBegin(node *head){
+    if(head==NULL)
+    return NULL;
+    else
+    {
+    node *temp=head->next;
+    delete head;
+    return temp;
+    }
+    
+}
+
+node *deleteTail(node *head){
+    if(head==NULL){
+        return NULL;
+    }
+    else
+    if(head->next==NULL){
+        delete head;
+        return NULL;
+    }
+    else{
+        node *temp=head;
+        while(temp->next->next!=NULL){
+            temp=temp->next;
+        }
+        delete temp->next;
+        temp->next=NULL;
+        return head;
+    }
+}
+
+void print(node * head){
+    node *temp =head;
+    while(temp!=NULL){
+        cout<<temp->data<<"->";
+        temp=temp->next;
+    }
+    cout<<"NULL"<<endl;
+}
+
+int main()
+{
+    node *head =NULL;
+    head =insertTail(head,2);
+    print(head);
+    head =insertTail(head,3);
+    head =insertTail(head,4);
+    head =insertTail(head,5);
+    print(head);
+    head=deleteBegin(head);
+    print(head);
+    head = deleteTail(head);
+    print(head);
+    
+    return 0;
+ }
